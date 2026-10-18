@@ -77,6 +77,11 @@ func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
 
 
+func consume_food(amount: float) -> void:
+	hunger = clampf(hunger + amount, 0.0, 100.0)
+	stats_changed.emit(warmth, hunger, health)
+
+
 func _update_survival_stats(delta: float) -> void:
 	var prev_warmth: float = warmth
 	var prev_hunger: float = hunger
