@@ -4,6 +4,7 @@ extends CharacterBody3D
 signal health_changed(new_value: float)
 signal hunger_changed(new_value: float)
 signal warmth_changed(new_value: float)
+signal stats_changed(warmth: float, hunger: float, health: float)
 
 @export_group("Movement Settings")
 @export var walk_speed: float = 5.0
@@ -50,7 +51,9 @@ var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 
 
 
 func _ready() -> void:
+	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	stats_changed.emit(warmth, hunger, health)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -67,14 +70,18 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	_decay_vitals(delta)
+	_update_survival_stats(delta)
 
 
 func _physics_process(delta: float) -> void:
 	_handle_movement(delta)
 
 
-func _decay_vitals(delta: float) -> void:
+func _update_survival_stats(delta: float) -> void:
+	var prev_warmth: float = warmth
+	var prev_hunger: float = hunger
+	var prev_health: float = health
+
 	hunger -= hunger_decay_rate * delta
 	warmth -= warmth_decay_rate * delta
 
@@ -86,6 +93,9 @@ func _decay_vitals(delta: float) -> void:
 
 	if damage > 0.0:
 		health -= damage
+
+	if not is_equal_approx(prev_warmth, warmth) or not is_equal_approx(prev_hunger, hunger) or not is_equal_approx(prev_health, health):
+		stats_changed.emit(warmth, hunger, health)
 
 
 func _handle_movement(delta: float) -> void:
