@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c8m8x001gjyhm"]
 
-[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="1_w3y0d"]
+[ext_resource type="PackedScene" uid="uid://cbp1qxyk1w3u1" path="res://scenes/player/Player.tscn" id="1_w3y0d"]
+[ext_resource type="PackedScene" uid="uid://bvyg7quepkcmr" path="res://scenes/ui/HUD.tscn" id="2_h8m21"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 
@@ -29,3 +30,5 @@ size = Vector3(50, 1, 50)
 
 [node name="Player" parent="." instance=ExtResource("1_w3y0d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="HUD" parent="." instance=ExtResource("2_h8m21")]

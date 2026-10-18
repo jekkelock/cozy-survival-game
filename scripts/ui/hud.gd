@@ -7,6 +7,9 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	print("HUD initialized")
+	update_stats(100.0, 100.0, 100.0)
+
 	var player: PlayerController = get_tree().get_first_node_in_group("player") as PlayerController
 	if player == null:
 		player = _find_player_in_tree(get_tree().root)
