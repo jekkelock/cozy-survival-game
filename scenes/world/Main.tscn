@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cbp1qxyk1w3u1" path="res://scenes/ui/Player.tscn" id="1_w3y0d"]
 [ext_resource type="PackedScene" uid="uid://bvyg7quepkcmr" path="res://scenes/player/HUD.tscn" id="2_h8m21"]
 [ext_resource type="PackedScene" uid="uid://c53vvyi185xrq" path="res://scenes/items/FoodItem.tscn" id="3_6ryrm"]
+[ext_resource type="PackedScene" uid="uid://e8b3c4d5f6g7" path="res://scenes/environment/Campfire.tscn" id="4_camp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 
@@ -39,3 +40,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 9)
 
 [node name="FoodItem2" parent="." unique_id=627427899 instance=ExtResource("3_6ryrm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 1)
+
+[node name="Campfire" parent="." unique_id=738491502 instance=ExtResource("4_camp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 5)

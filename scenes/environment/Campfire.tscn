@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://e8b3c4d5f6g7"]
+
+[ext_resource type="PackedScene" uid="uid://d2a5m3n7q8r1" path="res://scenes/components/WarmthSourceComponent.tscn" id="1_campfire"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.3, 0.3, 0.3, 1)
+roughness = 0.9
+metallic = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+material = SubResource("StandardMaterial3D_1")
+radius = 0.75
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.9, 0.3, 0.05, 0.8)
+roughness = 0.7
+metallic = 0.2
+transparency = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_1"]
+material = SubResource("StandardMaterial3D_2")
+radius = 0.3
+height = 0.6
+
+[node name="Campfire" type="Node3D" unique_id=447829103]
+
+[node name="Base" type="MeshInstance3D" parent="." unique_id=619384721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="Flame" type="MeshInstance3D" parent="." unique_id=830157294]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("SphereMesh_1")
+
+[node name="WarmthSource" parent="." unique_id=927401836 instance=ExtResource("1_campfire")]

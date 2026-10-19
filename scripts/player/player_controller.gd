@@ -49,6 +49,8 @@ signal stats_changed(warmth: float, hunger: float, health: float)
 
 var _gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8) as float
 
+@onready var inventory: InventoryComponent = $InventoryComponent
+
 
 func _ready() -> void:
 	add_to_group("player")
@@ -71,6 +73,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	_update_survival_stats(delta)
+	_handle_drop_input()
 
 
 func _physics_process(delta: float) -> void:
@@ -80,6 +83,18 @@ func _physics_process(delta: float) -> void:
 func consume_food(amount: float) -> void:
 	hunger = clampf(hunger + amount, 0.0, 100.0)
 	stats_changed.emit(warmth, hunger, health)
+
+
+func heal_and_warm(warmth_delta: float, health_delta: float) -> void:
+	warmth = clampf(warmth + warmth_delta, 0.0, 100.0)
+	health = clampf(health + health_delta, 0.0, 100.0)
+	stats_changed.emit(warmth, hunger, health)
+
+
+func _handle_drop_input() -> void:
+	if Input.is_action_just_pressed("drop_item"):
+		var drop_position: Vector3 = global_position + global_transform.basis.z * -2.0
+		inventory.drop_item(0, drop_position, 1)
 
 
 func _update_survival_stats(delta: float) -> void:

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d2a5m3n7q8r1"]
+
+[ext_resource type="Script" path="res://scripts/components/warmth_source_component.gd" id="1_wsc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1"]
+radius = 4.0
+
+[node name="WarmthSourceComponent" type="Area3D" unique_id=583920174]
+script = ExtResource("1_wsc")
+collision_layer = 1
+collision_mask = 1
+monitoring = true
+monitorable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=219847305]
+shape = SubResource("SphereShape3D_1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=345701289]
+omni_range = 8.0
+energy = 1.5
+attenuation = 0.5

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://3f1b2c4d5e6"]
+
+[ext_resource type="PackedScene" uid="uid://d2a5m3n7q8r1" path="res://scenes/components/WarmthSourceComponent.tscn" id="1_heater"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+roughness = 0.8
+metallic = 0.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_1"]
+material = SubResource("StandardMaterial3D_1")
+size = Vector3(0.4, 0.6, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2"]
+albedo_color = Color(0.9, 0.5, 0.1, 1)
+roughness = 0.6
+metallic = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1"]
+material = SubResource("StandardMaterial3D_2")
+radius = 0.05
+height = 0.3
+
+[node name="PropaneHeater" type="Area3D" unique_id=382910475]
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=501837294]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("BoxMesh_1")
+
+[node name="Tank" type="MeshInstance3D" parent="." unique_id=672904831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.4, 0)
+mesh = SubResource("CylinderMesh_1")
+
+[node name="WarmthSource" parent="." unique_id=491827035 instance=ExtResource("1_heater")]
+consumes_fuel = true
+fuel_level = 100.0
+warmth_restore_rate = 25.0
+health_restore_rate = 0.0
+fuel_consumption_rate = 10.0
